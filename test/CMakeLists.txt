@@ -1,6 +1,7 @@
 set(BINARY ${CMAKE_PROJECT_NAME}_test)
 
 set(TEST_SOURCES main.cpp 
+                 encodingBuffer_test.cpp
                  encoder_test.cpp
                  decoder_test.cpp)
 
@@ -9,4 +10,4 @@ add_executable(${BINARY} ${TEST_SOURCES})
 
 add_test(NAME ${BINARY} COMMAND ${BINARY})
 
-target_link_libraries(${BINARY} PUBLIC ${CMAKE_PROJECT_NAME}lib gtest)
+target_link_libraries(${BINARY} PUBLIC ${CMAKE_PROJECT_NAME}lib gtest gmock)
