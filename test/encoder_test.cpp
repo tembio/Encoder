@@ -5,9 +5,14 @@ TEST(Encoder, GetSymbolsReturnsNoSymbolsIfNoInputHasBeenRead) {
     // Given
     Encoder encoder;
 
-    // When
-    auto symbolTable = encoder.GetSymbolTable();
+    // When / Then
+    EXPECT_EQ (encoder.GetSymbols(), symbolTable{});
+}
 
-    // Then
-    EXPECT_EQ (symbolTable, std::vector<char>{});
+TEST(Encoder, GetEncodedDataReturnsNoDataIfNoInputHasBeenRead) {
+    // Given
+    Encoder encoder;
+
+    // When / Then
+    EXPECT_EQ (encoder.GetEncodedData(), std::vector<char>{});
 }
