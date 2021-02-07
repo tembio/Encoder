@@ -2,7 +2,6 @@
 #include "gtest/gtest.h"
 #include "encodingBuffer.hpp"
 
-
 TEST(Encoder, SizeReturns0WhenEmptyBuffer) {
     // Given
     EncodingBuffer buffer;
@@ -45,6 +44,25 @@ TEST(Encoder, IndexingReturnsCorrectData) {
     EXPECT_EQ (buffer[0], 1);
     EXPECT_EQ (buffer[1], 2);
     EXPECT_EQ (buffer[2], 3);
+}
+
+TEST(Encoder, IndexingOutOfBOundsThrowsExceptions) {
+    // Given
+    EncodingBuffer buffer;
+    buffer.push_back(1);
+
+    try {
+      // When
+      buffer[1];
+      FAIL() << "Expected std::out_of_range";
+    }
+    catch(std::out_of_range const & err) {
+      // Then
+      EXPECT_EQ(err.what(),std::string("Out of range"));
+    }
+    catch(...) {
+      FAIL() << "Expected std::out_of_range";
+    }
 }
 
 TEST(Encoder, EncodedDataIsDisplayedInOutput) {

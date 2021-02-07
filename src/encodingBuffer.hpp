@@ -1,13 +1,13 @@
 #include <vector>
 #include <ostream>
 
-enum class PositionInByte { least4SignificantBits, most4SignificantBits };
+enum class ValueInByte { firstValue, secondValue };
 
 class EncodingBuffer {
     private:
         std::vector<char> buffer_;
         std::size_t size_;
-        PositionInByte positionToWriteInByte_;
+        ValueInByte valueToWriteInByte_;
 
     public:
         EncodingBuffer();
