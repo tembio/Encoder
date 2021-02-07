@@ -15,4 +15,5 @@ set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
 add_executable(encode src/encode.cpp)
 target_link_libraries(encode PUBLIC ${CMAKE_PROJECT_NAME}lib)
 
-#add_executable(decode src/decode.cpp)
+add_executable(decode src/decode.cpp)
+target_link_libraries(decode PUBLIC ${CMAKE_PROJECT_NAME}lib)

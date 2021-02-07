@@ -5,6 +5,8 @@ set(SOURCES
     encodingBuffer.cpp
 
     decode.cpp
+    decoder.hpp
+    decoder.cpp
 
     encode.cpp
     encoder.hpp
