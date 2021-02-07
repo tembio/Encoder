@@ -1,6 +1,7 @@
+#include <sstream>
 #include "gtest/gtest.h"
-// #include "gmock/gmock.h"
 #include "encodingBuffer.hpp"
+
 
 TEST(Encoder, SizeReturns0WhenEmptyBuffer) {
     // Given
@@ -23,8 +24,7 @@ TEST(Encoder, SizeReturnsCorrectValueAfterAddingData) {
     EXPECT_EQ (buffer.size(), 3);
 }
 
-
-TEST(Encoder, IndexingReturnsCorrectDataForOddNumberOfSymbols) {
+TEST(Encoder, IndexingReturnsCorrectData) {
     // Given
     EncodingBuffer buffer;
 
@@ -35,6 +35,11 @@ TEST(Encoder, IndexingReturnsCorrectDataForOddNumberOfSymbols) {
 
     // When 
     buffer.push_back(2);
+    // Then
+    EXPECT_EQ (buffer[0], 1);
+    EXPECT_EQ (buffer[1], 2);
+
+    // When 
     buffer.push_back(3);
     // Then
     EXPECT_EQ (buffer[0], 1);
@@ -42,21 +47,27 @@ TEST(Encoder, IndexingReturnsCorrectDataForOddNumberOfSymbols) {
     EXPECT_EQ (buffer[2], 3);
 }
 
-TEST(Encoder, IndexingReturnsCorrectDataForEvenNumberOfSymbols) {
+TEST(Encoder, EncodedDataIsDisplayedInOutput) {
     // Given
     EncodingBuffer buffer;
-
-    // When 
-    buffer.push_back(1);
-    buffer.push_back(2);
-    // Then
-    EXPECT_EQ (buffer[0], 1);
-    EXPECT_EQ (buffer[1], 2);
-
-    // When 
-    buffer.push_back(3);
     buffer.push_back(4);
+    buffer.push_back(2);
+    buffer.push_back(4);
+    buffer.push_back(1);
+
+    // When 
+    std::stringstream stream;
+    stream<<buffer;
     // Then
-    EXPECT_EQ (buffer[2], 3);
-    EXPECT_EQ (buffer[3], 4);
+    ASSERT_STREQ (stream.str().c_str(), "BA");
+
+    
+    // Given
+    buffer.push_back(5);
+ 
+    // When 
+    std::stringstream stream2;
+    stream2<<buffer;
+    // Then
+    ASSERT_STREQ (stream2.str().c_str(), "BA\x05");
 }
