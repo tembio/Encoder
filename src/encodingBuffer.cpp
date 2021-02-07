@@ -44,7 +44,7 @@ char EncodingBuffer::operator[](std::size_t idx) const {
     } 
 
     if (valueInMostSignificantBits) {
-        return buffer_[idx/2]>>4; // Value in the 4 most significant bits
+        return buffer_[idx/2]>>4; 
     }
     return buffer_[idx/2] & 0xf; // Value in the 4 least significant bits
 }
