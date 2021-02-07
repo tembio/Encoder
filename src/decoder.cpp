@@ -1,6 +1,5 @@
 #include <unordered_map>
 #include <sstream>
-#include <iostream>
 #include "decoder.hpp"
 
 const SymbolTable& Decoder::GetSymbols() const {
