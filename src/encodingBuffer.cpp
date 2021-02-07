@@ -8,7 +8,7 @@ void setSecondValueInByte(char &byte, char value) {
     byte |= value & 0xf;            // Write second value in 4 less significant bits
 }
 char getFirstValueInByte(char byte) {
-    return byte >> 4;
+    return (byte >> 4) & 0xf;
 }
 char getSecondValueInByte(char byte) {
     return byte & 0xf; 
