@@ -1,20 +1,18 @@
-#include <iostream>
+#include <istream>
 #include <vector>
+#include "encodingBuffer.hpp"
 
-typedef std::vector<char> symbolTable;
-typedef std::vector<char> encodingBuffer;
+typedef std::vector<char> SymbolTable;
 
 class Encoder {
     private:
-        encodingBuffer buffer_;
-        symbolTable symbols_;
+        EncodingBuffer buffer_;
+        SymbolTable symbols_;
 
     public:
 
-    const symbolTable& GetSymbols() const;
-    const encodingBuffer& GetEncodedData() const;
+    const SymbolTable& GetSymbols() const;
+    const EncodingBuffer& GetEncodedData() const;
 
-    friend std::ostream& operator<<(std::ostream& os, const Encoder& e);
-    friend std::istream& operator>>(std::istream& is, const Encoder& e);
-
+    friend std::istream& operator>>(std::istream& is, Encoder& e);
 };

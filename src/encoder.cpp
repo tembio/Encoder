@@ -1,22 +1,27 @@
+#include <unordered_map>
 #include "encoder.hpp"
 
-const symbolTable& Encoder::GetSymbols() const {
+const SymbolTable& Encoder::GetSymbols() const {
     return symbols_;
 }
 
-const encodingBuffer& Encoder::GetEncodedData() const {
+const EncodingBuffer& Encoder::GetEncodedData() const {
     return buffer_;
 }
 
+std::istream& operator>>(std::istream& is, Encoder& e) {
+    std::unordered_map<char,char> symbolToIndex;
+    char symbolIndex = 0;
 
-std::ostream& operator<<(std::ostream& os, const Encoder& e)
-{
-    //os << dt.mo << '/' << dt.da << '/' << dt.yr;
-    return os;
-}
+    char symbol;
+    while (is.get(symbol)) {
+        if (symbolToIndex.find(symbol) == symbolToIndex.end()) {
+            symbolToIndex[symbol] = symbolIndex++;
+            e.symbols_.push_back(symbol);
+        }
 
-std::istream& operator>>(std::istream& is, const Encoder& e)
-{
-    //os << dt.mo << '/' << dt.da << '/' << dt.yr;
+        e.buffer_.push_back(symbolToIndex[symbol]);
+    }
+
     return is;
 }
