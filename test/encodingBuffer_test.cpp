@@ -2,7 +2,7 @@
 #include "gtest/gtest.h"
 #include "encodingBuffer.hpp"
 
-TEST(Encoder, SizeReturns0WhenEmptyBuffer) {
+TEST(EncodingBuffer, SizeReturns0WhenEmptyBuffer) {
     // Given
     EncodingBuffer buffer;
 
@@ -10,7 +10,7 @@ TEST(Encoder, SizeReturns0WhenEmptyBuffer) {
     EXPECT_EQ (buffer.size(), 0);
 }
 
-TEST(Encoder, SizeReturnsCorrectValueAfterAddingData) {
+TEST(EncodingBuffer, SizeReturnsCorrectValueAfterAddingData) {
     // Given
     EncodingBuffer buffer;
 
@@ -23,7 +23,7 @@ TEST(Encoder, SizeReturnsCorrectValueAfterAddingData) {
     EXPECT_EQ (buffer.size(), 3);
 }
 
-TEST(Encoder, IndexingReturnsCorrectData) {
+TEST(EncodingBuffer, IndexingReturnsCorrectData) {
     // Given
     EncodingBuffer buffer;
 
@@ -46,7 +46,31 @@ TEST(Encoder, IndexingReturnsCorrectData) {
     EXPECT_EQ (buffer[2], 3);
 }
 
-TEST(Encoder, IndexingOutOfBOundsThrowsExceptions) {
+TEST(EncodingBuffer, SetEncodedData) {
+    // Given
+    EncodingBuffer buffer;
+
+    // When 
+    std::vector<char> encodedData{1,18}; //0000,0001,0001,0010
+    buffer.setEncodedData(3, std::move(encodedData));
+    // Then
+    EXPECT_EQ (buffer[0], 0);
+    EXPECT_EQ (buffer[1], 1);
+    EXPECT_EQ (buffer[2], 2);
+
+    // When 
+    encodedData = std::vector<char>{1,33,3}; //0000,0001,0010,0001,0000,0011
+    buffer.setEncodedData(6, std::move(encodedData));
+    // Then
+    EXPECT_EQ (buffer[0], 0);
+    EXPECT_EQ (buffer[1], 1);
+    EXPECT_EQ (buffer[2], 2);
+    EXPECT_EQ (buffer[3], 1);
+    EXPECT_EQ (buffer[4], 0);
+    EXPECT_EQ (buffer[5], 3);
+}
+
+TEST(EncodingBuffer, IndexingOutOfBOundsThrowsExceptions) {
     // Given
     EncodingBuffer buffer;
     buffer.push_back(1);
@@ -65,7 +89,7 @@ TEST(Encoder, IndexingOutOfBOundsThrowsExceptions) {
     }
 }
 
-TEST(Encoder, EncodedDataIsDisplayedInOutput) {
+TEST(EncodingBuffer, EncodedDataIsDisplayedInOutput) {
     // Given
     EncodingBuffer buffer;
     buffer.push_back(4);

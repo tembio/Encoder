@@ -62,6 +62,11 @@ char EncodingBuffer::operator[](std::size_t idx) const {
     
 }
 
+void EncodingBuffer::setEncodedData(std::size_t numSymbols, const std::vector<char>&& data) {
+    buffer_ = data;
+    size_ = numSymbols;
+}
+
 std::ostream& operator<<(std::ostream& os, const EncodingBuffer& e) {
     for(auto c : e.buffer_) {
         os.put(c);
