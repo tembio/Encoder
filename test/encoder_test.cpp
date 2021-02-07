@@ -115,7 +115,6 @@ TEST(Encoder, WriteEncodedDataToOutputIsCorrect) {
     EXPECT_EQ (output.str().c_str()[7], '\x02');
 }
 
-
 TEST(Encoder, WriteEncodedDataToOutputIsCorrectInProvidedExample) {
     // Given
     Encoder encoder;

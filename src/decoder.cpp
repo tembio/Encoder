@@ -11,7 +11,7 @@ void checkMaxNumDecodingSymbols(std::size_t numSymbols) {
             std::stringstream ss;
             ss << "Number of symbols greater than " << (int)MAX_SYMBOLS;
             throw std::out_of_range(ss.str());
-        }
+    }
 }
 
 std::istream& operator>>(std::istream& is, Decoder& e) {
@@ -29,8 +29,7 @@ std::istream& operator>>(std::istream& is, Decoder& e) {
 
     std::vector<char> encodedData;
     char byte;
-    while (is.get(byte))
-    {
+    while (is.get(byte)) {
         encodedData.push_back(byte);
     }
     e.buffer_.setEncodedData(numSymbolsToDecode, std::move(encodedData));
@@ -39,7 +38,7 @@ std::istream& operator>>(std::istream& is, Decoder& e) {
 }
 
 std::ostream& operator<<(std::ostream& os, Decoder& e) {
-    for (auto i=0; i<e.buffer_.size(); i++) {
+    for (std::size_t i=0; i<e.buffer_.size(); i++) {
         auto symbolIndex = e.buffer_[i];
         os.put(e.symbols_[symbolIndex]);
     }

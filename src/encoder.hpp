@@ -1,4 +1,4 @@
-#include <istream>
+#include <iostream>
 #include <vector>
 #include "encodingBuffer.hpp"
 
