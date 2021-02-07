@@ -8,7 +8,6 @@ set(SOURCES
 
     encode.cpp
     encoder.hpp
-    
     encoder.cpp
 )
 

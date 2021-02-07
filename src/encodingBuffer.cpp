@@ -64,7 +64,7 @@ char EncodingBuffer::operator[](std::size_t idx) const {
 
 std::ostream& operator<<(std::ostream& os, const EncodingBuffer& e) {
     for(auto c : e.buffer_) {
-        os<<c;
+        os.put(c);
     }
 }
 
