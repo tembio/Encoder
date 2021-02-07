@@ -109,9 +109,10 @@ TEST(Encoder, WriteEncodedDataToOutputIsCorrect) {
     EXPECT_EQ (output.str().c_str()[1], 'a');
     EXPECT_EQ (output.str().c_str()[2], 'b');
     EXPECT_EQ (output.str().c_str()[3], 'c');
-    EXPECT_EQ (output.str().c_str()[4], '\x01');
-    EXPECT_EQ (output.str().c_str()[5], '\x20');
-    EXPECT_EQ (output.str().c_str()[6], '\x02');
+    EXPECT_EQ (output.str().c_str()[4], 5);
+    EXPECT_EQ (output.str().c_str()[5], '\x01');
+    EXPECT_EQ (output.str().c_str()[6], '\x20');
+    EXPECT_EQ (output.str().c_str()[7], '\x02');
 }
 
 
@@ -130,6 +131,7 @@ TEST(Encoder, WriteEncodedDataToOutputIsCorrectInProvidedExample) {
     std::vector<char> expectedChars {
         10,
         'R','Y', 'K', 'A', 'G', 'C', 'W', 'T', 'M', 'S',
+        47,
         '\x01', '\x23', '\x00', '\x23', '\x34', '\x56', '\x37',
         '\x16', '\x28', '\x75', '\x76', '\x03', '\x49', '\x08',
         '\x45', '\x72', '\x47', '\x25', '\x35', '\x81', '\x35',

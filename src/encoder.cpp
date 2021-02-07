@@ -39,5 +39,6 @@ std::istream& operator>>(std::istream& is, Encoder& e) {
 std::ostream& operator<<(std::ostream& os, Encoder& e) {
     os.put(e.symbols_.size());
     os.write(e.symbols_.data(), e.symbols_.size());
+    os.put(e.buffer_.size());
     return os << e.buffer_;
 }
