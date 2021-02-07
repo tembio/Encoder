@@ -48,6 +48,25 @@ TEST(Encoder, GetSymbolsReturnsNonRepeatedSymbolsWhenInputHasBeenRead) {
     EXPECT_THAT(encoder.GetSymbols(), ::testing::ElementsAre('a','b'));
 }
 
+TEST(Encoder, ExceptionIsThrownWhenThereAreMoreThan16Symbols) {
+    // Given
+    Encoder encoder;
+    std::stringstream input;
+    input << "0123456789ABCDEFGHI";
+
+    try {
+      // When
+      input >> encoder;
+      FAIL() << "Expected std::out_of_range";
+    }
+    catch(std::out_of_range const & err) {
+      // Then
+      EXPECT_EQ(err.what(),std::string("Number of symbols greater than 16"));
+    }
+    catch(...) {
+      FAIL() << "Expected std::out_of_range";
+    }
+}
 
 TEST(Encoder, GetEncodedDataReturnsNoDataWhenNoInputHasBeenRead) {
     // Given

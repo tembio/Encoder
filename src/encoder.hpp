@@ -2,6 +2,8 @@
 #include <vector>
 #include "encodingBuffer.hpp"
 
+const char MAX_SYMBOLS = 16;
+
 typedef std::vector<char> SymbolTable;
 
 class Encoder {

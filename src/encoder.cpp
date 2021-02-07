@@ -1,4 +1,5 @@
 #include <unordered_map>
+#include <sstream>
 #include "encoder.hpp"
 
 const SymbolTable& Encoder::GetSymbols() const {
@@ -7,6 +8,14 @@ const SymbolTable& Encoder::GetSymbols() const {
 
 const EncodingBuffer& Encoder::GetEncodedData() const {
     return buffer_;
+}
+
+void checkMaxNumberOfSymbols(std::size_t numSymbols) {
+    if (numSymbols > MAX_SYMBOLS) {
+            std::stringstream ss;
+            ss << "Number of symbols greater than " << (int)MAX_SYMBOLS;
+            throw std::out_of_range(ss.str());
+        }
 }
 
 std::istream& operator>>(std::istream& is, Encoder& e) {
@@ -18,6 +27,7 @@ std::istream& operator>>(std::istream& is, Encoder& e) {
         if (symbolToIndex.find(symbol) == symbolToIndex.end()) {
             symbolToIndex[symbol] = symbolIndex++;
             e.symbols_.push_back(symbol);
+            checkMaxNumberOfSymbols(e.symbols_.size());
         }
 
         e.buffer_.push_back(symbolToIndex[symbol]);
