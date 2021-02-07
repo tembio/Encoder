@@ -15,4 +15,6 @@ class Encoder {
     const EncodingBuffer& GetEncodedData() const;
 
     friend std::istream& operator>>(std::istream& is, Encoder& e);
+    friend std::ostream& operator<<(std::ostream& os, Encoder& e);
+
 };
