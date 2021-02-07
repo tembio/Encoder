@@ -93,7 +93,7 @@ TEST(Encoder, GetEncodedDataReturnsEncodedDataWhenInputHasBeenRead) {
     EXPECT_EQ (output.str().c_str()[2], '\x02');
 }
 
-TEST(Encoder, WriteToOutputIsCorrect) {
+TEST(Encoder, WriteEncodedDataToOutputIsCorrect) {
     // Given
     Encoder encoder;
     std::stringstream input;
@@ -115,7 +115,7 @@ TEST(Encoder, WriteToOutputIsCorrect) {
 }
 
 
-TEST(Encoder, WriteToOutputIsCorrectForGivenExample) {
+TEST(Encoder, WriteEncodedDataToOutputIsCorrectInProvidedExample) {
     // Given
     Encoder encoder;
     std::stringstream input;
