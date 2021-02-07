@@ -1,4 +1,4 @@
-set(BINARY ${CMAKE_PROJECT_NAME}_test)
+set(BINARY tests)
 
 set(TEST_SOURCES main.cpp 
                  encodingBuffer_test.cpp

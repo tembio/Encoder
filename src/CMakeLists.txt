@@ -13,6 +13,4 @@ set(SOURCES
     encoder.cpp
 )
 
-add_executable(${BINARY} ${SOURCES})
-
 add_library(${BINARY}lib STATIC ${SOURCES})
